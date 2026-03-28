@@ -1,0 +1,22 @@
+{
+    "comparison": {
+        "YoloV5 + RCNN": {
+            "Accuracy": 57.49999999999999,
+            "Precision": 75.57142857142857,
+            "Recall": 61.944444444444436,
+            "FMeasure": 58.23897235661941
+        },
+        "YoloV7 + RCNN": {
+            "Accuracy": 70.0,
+            "Precision": 78.78571428571429,
+            "Recall": 68.92857142857143,
+            "FMeasure": 71.93893825472773
+        },
+        "YoloV8": {
+            "Accuracy": 82.5,
+            "Precision": 92.63157894736842,
+            "Recall": 79.56349206349206,
+            "FMeasure": 83.50153957364583
+        }
+    }
+}
