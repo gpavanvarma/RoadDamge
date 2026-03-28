@@ -3,7 +3,4 @@ ultralytics
 opencv-python-headless
 gunicorn
 numpy
-Flask-SQLAlchemy
-Flask-Login
 werkzeug
-psycopg2-binary
