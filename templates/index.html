@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - RoadGuard AI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="nav-logo">
+            <i class="fa-solid fa-road"></i>
+            <span>RoadGuard AI</span>
+        </div>
+        <div class="user-menu">
+            <span>Welcome, <strong>{{ name }}</strong></span>
+            <a href="/logout" class="btn btn-sm btn-outline-danger">
+                Logout
+            </a>
+        </div>
+    </nav>
+
+    <div class="container dashboard-container">
+
+        <!-- Detection Section -->
+        <section class="section-card">
+            <div class="section-header">
+                <h2><i class="fa-solid fa-camera"></i> Live Detection</h2>
+                <p>Upload road images to detect damage using YOLOv8</p>
+            </div>
+
+            <div class="upload-section" id="drop-area">
+                <div class="upload-content">
+                    <i class="fa-solid fa-cloud-arrow-up upload-icon"></i>
+                    <h3>Upload an Image</h3>
+                    <p>Drag & drop or click to browse</p>
+                    <input type="file" id="file-input" accept="image/*" hidden>
+                    <button class="btn btn-primary" onclick="document.getElementById('file-input').click()">Choose
+                        File</button>
+                </div>
+            </div>
+
+            <div class="preview-section" id="preview-section" style="display: none;">
+                <div class="image-card">
+                    <div class="card-header">
+                        <h4>Original Image</h4>
+                    </div>
+                    <div class="image-container">
+                        <img id="original-image" src="" alt="Original">
+                    </div>
+                </div>
+
+                <div class="process-arrow">
+                    <i class="fa-solid fa-arrow-right"></i>
+                </div>
+
+                <div class="image-card">
+                    <div class="card-header">
+                        <h4>Detected Damage</h4>
+                        <span class="badge" id="detection-count">0 Detections</span>
+                    </div>
+                    <div class="image-container" id="result-container">
+                        <div class="loader" id="loader"></div>
+                        <img id="processed-image" src="" alt="Processed" style="display: none;">
+                    </div>
+                </div>
+            </div>
+
+            <div class="actions" id="action-buttons" style="display: none;">
+                <button class="btn btn-secondary" id="reset-btn">
+                    <i class="fa-solid fa-rotate-right"></i> Process New Image
+                </button>
+                <a id="download-link" href="#" download="detection_result.jpg" class="btn btn-primary">
+                    <i class="fa-solid fa-download"></i> Download Result
+                </a>
+            </div>
+        </section>
+
+        <!-- Analytics Section (Hidden by default, shown after detection) -->
+        <section class="section-card" id="analytics-section" style="display: none;">
+            <div class="section-header">
+                <h2><i class="fa-solid fa-chart-line"></i> Model Analytics</h2>
+                <p>Performance metrics and training history comparison</p>
+            </div>
+
+            <div class="charts-grid" style="display: flex; gap: 2rem; flex-wrap: wrap;">
+                <div class="chart-card" style="flex: 1; min-width: 400px;">
+                    <h3>Model Comparison Chart</h3>
+                    <canvas id="comparisonChart"></canvas>
+                </div>
+                <div class="chart-card" style="flex: 1; min-width: 400px;">
+                    <h3>Training Accuracy History</h3>
+                    <canvas id="accuracyChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Numeric Metrics Display -->
+            <div class="metrics-details-container" id="metrics-details">
+                <div class="section-header" style="margin-top: 2rem;">
+                    <h3><i class="fa-solid fa-square-check"></i> Image Detection Results</h3>
+                </div>
+                <div class="metrics-grid" id="metrics-text-grid">
+                    <!-- JavaScript will populate this -->
+                    <div class="loader-small"></div>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>&copy; 2026 Road Damage Detection System. AI Powered.</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+
+</html>
